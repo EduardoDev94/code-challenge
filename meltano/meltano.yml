@@ -18,7 +18,8 @@ plugins:
       database: northwind
       filter_schemas:
       - public
-  - name: tap-csv
+  - name: tap-csv-firststep
+    inherit_from: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
@@ -26,26 +27,33 @@ plugins:
       - path: ./data/order_details.csv
         entity: order_details
         keys: [order_id, product_id]
+  - name: tap-csv-secondstep
+    inherit_from: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+    config:
+      files:
+        - path: ./data/postgres/public-categories.csv
+          entity: categories
+          keys: [category_id]
+        - path: ./data/postgres/public-employees.csv
+          entity: employees
+          keys: [employee_id]
   loaders:
   - name: target-postgres
     variant: meltanolabs
     pip_url: meltanolabs-target-postgres
     config:
-      output_path: /data/csv
-      date_format: '%Y-%m-%d'
-      file_naming: '{date}/file.csv'
+      default_target_schema: public
+      host: localhost
+      port: 5433
+      user: postgres
+      password: 12345
+      database: northwind
   - name: target-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/target-csv.git
     config:
-      separate_files_per_table: true
-      datestamp_format: '%Y-%m-%d'
       output_path: ./data/postgres/
-      file_naming_scheme: '{table}/{datestamp}/file.csv'
-  - name: target-jsonl
-    variant: andyh1203
-    pip_url: target-jsonl
-    config:
-      destination_path: ./data/postgrees
-      do_timestamp_file: true
-      separate_files_per_table: true
+      file_naming_scheme: '{stream_name}.csv'
+

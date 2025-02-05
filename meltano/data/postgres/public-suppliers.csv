@@ -1,56 +1,13 @@
-state_id,state_name,state_abbr,state_region
-1,Alabama,AL,south
-2,Alaska,AK,north
-3,Arizona,AZ,west
-4,Arkansas,AR,south
-5,California,CA,west
-6,Colorado,CO,west
-7,Connecticut,CT,east
-8,Delaware,DE,east
-9,District of Columbia,DC,east
-10,Florida,FL,south
-11,Georgia,GA,south
-12,Hawaii,HI,west
-13,Idaho,ID,midwest
-14,Illinois,IL,midwest
-15,Indiana,IN,midwest
-16,Iowa,IO,midwest
-17,Kansas,KS,midwest
-18,Kentucky,KY,south
-19,Louisiana,LA,south
-20,Maine,ME,north
-21,Maryland,MD,east
-22,Massachusetts,MA,north
-23,Michigan,MI,north
-24,Minnesota,MN,north
-25,Mississippi,MS,south
-26,Missouri,MO,south
-27,Montana,MT,west
-28,Nebraska,NE,midwest
-29,Nevada,NV,west
-30,New Hampshire,NH,east
-31,New Jersey,NJ,east
-32,New Mexico,NM,west
-33,New York,NY,east
-34,North Carolina,NC,east
-35,North Dakota,ND,midwest
-36,Ohio,OH,midwest
-37,Oklahoma,OK,midwest
-38,Oregon,OR,west
-39,Pennsylvania,PA,east
-40,Rhode Island,RI,east
-41,South Carolina,SC,east
-42,South Dakota,SD,midwest
-43,Tennessee,TN,midwest
-44,Texas,TX,west
-45,Utah,UT,west
-46,Vermont,VT,east
-47,Virginia,VA,east
-48,Washington,WA,west
-49,West Virginia,WV,south
-50,Wisconsin,WI,midwest
-51,Wyoming,WY,west
-näckebröd AB,Lars Peterson,Sales Agent,Kaloadagatan 13,Göteborg,,S-345 67,Sweden,031-987 65 43,031-987 65 91,
+supplier_id,company_name,contact_name,contact_title,address,city,region,postal_code,country,phone,fax,homepage
+1,Exotic Liquids,Charlotte Cooper,Purchasing Manager,49 Gilbert St.,London,,EC1 4SD,UK,(171) 555-2222,,
+2,New Orleans Cajun Delights,Shelley Burke,Order Administrator,P.O. Box 78934,New Orleans,LA,70117,USA,(100) 555-4822,,#CAJUN.HTM#
+3,Grandma Kelly's Homestead,Regina Murphy,Sales Representative,707 Oxford Rd.,Ann Arbor,MI,48104,USA,(313) 555-5735,(313) 555-3349,
+4,Tokyo Traders,Yoshi Nagase,Marketing Manager,9-8 Sekimai Musashino-shi,Tokyo,,100,Japan,(03) 3555-5011,,
+5,Cooperativa de Quesos 'Las Cabras',Antonio del Valle Saavedra,Export Administrator,Calle del Rosal 4,Oviedo,Asturias,33007,Spain,(98) 598 76 54,,
+6,Mayumi's,Mayumi Ohno,Marketing Representative,92 Setsuko Chuo-ku,Osaka,,545,Japan,(06) 431-7877,,Mayumi's (on the World Wide Web)#http://www.microsoft.com/accessdev/sampleapps/mayumi.htm#
+7,"Pavlova, Ltd.",Ian Devling,Marketing Manager,74 Rose St. Moonie Ponds,Melbourne,Victoria,3058,Australia,(03) 444-2343,(03) 444-6588,
+8,"Specialty Biscuits, Ltd.",Peter Wilson,Sales Representative,29 King's Way,Manchester,,M14 GSD,UK,(161) 555-4448,,
+9,PB Knäckebröd AB,Lars Peterson,Sales Agent,Kaloadagatan 13,Göteborg,,S-345 67,Sweden,031-987 65 43,031-987 65 91,
 10,Refrescos Americanas LTDA,Carlos Diaz,Marketing Manager,Av. das Americanas 12.890,Sao Paulo,,5442,Brazil,(11) 555 4640,,
 11,Heli Süßwaren GmbH & Co. KG,Petra Winkler,Sales Manager,Tiergartenstraße 5,Berlin,,10785,Germany,(010) 9984510,,
 12,Plutzer Lebensmittelgroßmärkte AG,Martin Bein,International Marketing Mgr.,Bogenallee 51,Frankfurt,,60439,Germany,(069) 992755,,Plutzer (on the World Wide Web)#http://www.microsoft.com/accessdev/sampleapps/plutzer.htm#
