@@ -12,7 +12,7 @@ plugins:
     pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
     config:
       host: localhost
-      port: 5433
+      port: 5432
       user: postgres
       password: 12345
       database: northwind
@@ -27,18 +27,54 @@ plugins:
       - path: ./data/order_details.csv
         entity: order_details
         keys: [order_id, product_id]
+  - name: tap-csv-laststep
+    inherit_from: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+    config:
+      files:
+      - path: ./data/csv/order_details.csv
+        entity: order_details
+        keys: [order_id, product_id]
   - name: tap-csv-secondstep
     inherit_from: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
       files:
-        - path: ./data/postgres/public-categories.csv
-          entity: categories
-          keys: [category_id]
-        - path: ./data/postgres/public-employees.csv
-          entity: employees
-          keys: [employee_id]
+      - path: ./data/postgres/public-categories.csv
+        entity: categories
+        keys: [category_id]
+      - path: ./data/postgres/public-employees.csv
+        entity: employees
+        keys: [employee_id]
+      - path: ./data/postgres/public-customers.csv
+        entity: customers
+        keys: [customer_id]
+      - path: ./data/postgres/public-employee_territories.csv
+        entity: employee_territories
+        keys: [employee_id, territory_id]
+      - path: ./data/postgres/public-orders.csv
+        entity: orders
+        keys: [order_id, customer_id, employee_id]
+      - path: ./data/postgres/public-products.csv
+        entity: products
+        keys: [product_id,supplier_id,category_id]
+      - path: ./data/postgres/public-region.csv
+        entity: region
+        keys: [region_id]
+      - path: ./data/postgres/public-shippers.csv
+        entity: shippers
+        keys: [shipper_id]
+      - path: ./data/postgres/public-suppliers.csv
+        entity: suppliers
+        keys: [supplier_id]
+      - path: ./data/postgres/public-territories.csv
+        entity: territories
+        keys: [territory_id, region_id]
+      - path: ./data/postgres/public-us_states.csv
+        entity: us_states
+        keys: [state_id]
   loaders:
   - name: target-postgres
     variant: meltanolabs
@@ -46,14 +82,21 @@ plugins:
     config:
       default_target_schema: public
       host: localhost
-      port: 5433
+      port: 5432
       user: postgres
       password: 12345
       database: northwind
-  - name: target-csv
+  - name: target-csv-firststep
+    inherit_from: target-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-csv.git
+    config:
+      output_path: ./data/csv/
+      file_naming_scheme: '{stream_name}.csv'
+  - name: target-csv-postgres
+    inherit_from: target-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/target-csv.git
     config:
       output_path: ./data/postgres/
       file_naming_scheme: '{stream_name}.csv'
-
