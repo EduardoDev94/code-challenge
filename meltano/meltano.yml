@@ -7,7 +7,7 @@ environments:
 - name: prod
 plugins:
   extractors:
-  - name: tap-postgres
+  - name: tap-postgres-firststep
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
     config:
@@ -18,7 +18,7 @@ plugins:
       database: northwind
       filter_schemas:
       - public
-  - name: tap-csv-firststep
+  - name: tap-order-list-firststep
     inherit_from: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
@@ -27,7 +27,7 @@ plugins:
       - path: ./data/order_details.csv
         entity: order_details
         keys: [order_id, product_id]
-  - name: tap-csv-laststep
+  - name: tap-order-list-secondstep
     inherit_from: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
@@ -36,7 +36,7 @@ plugins:
       - path: ./data/csv/order_details.csv
         entity: order_details
         keys: [order_id, product_id]
-  - name: tap-csv-secondstep
+  - name: tap-localfiles-postgrees
     inherit_from: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
@@ -59,7 +59,7 @@ plugins:
         keys: [order_id, customer_id, employee_id]
       - path: ./data/postgres/public-products.csv
         entity: products
-        keys: [product_id,supplier_id,category_id]
+        keys: [product_id, supplier_id, category_id]
       - path: ./data/postgres/public-region.csv
         entity: region
         keys: [region_id]
@@ -86,17 +86,23 @@ plugins:
       user: postgres
       password: 12345
       database: northwind
-  - name: target-csv-firststep
+  - name: target-firststep-csv
     inherit_from: target-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/target-csv.git
     config:
       output_path: ./data/csv/
       file_naming_scheme: '{stream_name}.csv'
-  - name: target-csv-postgres
+  - name: target-postgres-to-csv
     inherit_from: target-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/target-csv.git
     config:
       output_path: ./data/postgres/
       file_naming_scheme: '{stream_name}.csv'
+  utilities:
+  - name: airflow
+    variant: apache
+    pip_url: git+https://github.com/meltano/airflow-ext.git@main apache-airflow==2.8.1
+      --constraint 
+      https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-no-providers-${MELTANO__PYTHON_VERSION}.txt
