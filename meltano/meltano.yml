@@ -13,7 +13,7 @@ plugins:
     pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
     config:
       host: localhost
-      port: 5432
+      port: 5433
       user: postgres
       password: 12345
       database: northwind
@@ -76,6 +76,12 @@ plugins:
       - path: ./data/postgres/public-us_states.csv
         entity: us_states
         keys: [state_id]
+  - name: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+  - name: tap-postgres
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
   loaders:
   - name: target-postgres
     variant: meltanolabs
@@ -83,7 +89,7 @@ plugins:
     config:
       default_target_schema: public
       host: localhost
-      port: 5432
+      port: 5433
       user: postgres
       password: 12345
       database: northwind
@@ -93,7 +99,8 @@ plugins:
     pip_url: git+https://github.com/MeltanoLabs/target-csv.git
     config:
       output_path: ./data/csv/
-      file_naming_scheme: '{stream_name}.csv'
+      timestamp_format: '%y-%m-%d'
+      file_naming_scheme: '{datestamp}-{stream_name}.csv'
   - name: target-postgres-to-csv
     inherit_from: target-csv
     variant: meltanolabs
@@ -101,3 +108,12 @@ plugins:
     config:
       output_path: ./data/postgres/
       file_naming_scheme: '{stream_name}.csv'
+  - name: target-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-csv.git
+  utilities:
+  - name: airflow
+    variant: apache
+    pip_url: git+https://github.com/meltano/airflow-ext.git@main apache-airflow==2.8.1
+      --constraint 
+      https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-no-providers-${MELTANO__PYTHON_VERSION}.txt
